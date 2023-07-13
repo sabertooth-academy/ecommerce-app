@@ -1,6 +1,7 @@
+import 'package:ecommerce_app/route/route_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+import '../home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -131,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: MaterialButton(
                     onPressed: () {
                       if(formKey.currentState!.validate()) {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage()));
+                        Navigator.pushNamed(context, RouteManager.home);
                       }
                     },
                     color: Colors.cyan,
