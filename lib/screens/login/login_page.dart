@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   filled: true,
                   fillColor: Colors.cyan.withOpacity(0.2),
                   suffixIcon: IconButton(
-                    icon: isVisiblePassword ? Icon(Icons.visibility, color: Colors.grey.shade700,) : Icon(Icons.visibility_off, color: Colors.grey.shade700,),
+                    icon: !isVisiblePassword ? Icon(Icons.visibility, color: Colors.grey.shade700,) : Icon(Icons.visibility_off, color: Colors.grey.shade700,),
                     onPressed: () {
                       setState((){
                         isVisiblePassword = !isVisiblePassword;
