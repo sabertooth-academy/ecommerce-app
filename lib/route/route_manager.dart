@@ -21,7 +21,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (_) => LoginPage());
 
       case home:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => HomePage());
 
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold(body: Center(child: Text('No Page Found!'),),));
