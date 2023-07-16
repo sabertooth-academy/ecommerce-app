@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/route/route_manager.dart';
+import 'package:ecommerce_app/utils/global_variables.dart';
+import 'package:ecommerce_app/utils/my_shared_preference.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,6 +11,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+
+  final _sharedPreference = MySharedPreference();
 
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -39,10 +43,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
 
   void _onStart() async {
+    currentUser = await _sharedPreference.getUser();
+
     await Future.delayed(const Duration(seconds: 2));
 
     if(!mounted) return;
-    Navigator.pushNamedAndRemoveUntil(context, RouteManager.login, (route) => false);
+    if(currentUser != null && currentUser?.userName != null) {
+      Navigator.pushNamedAndRemoveUntil(context, RouteManager.home, (route) => false);
+    }
+    else{
+      Navigator.pushNamedAndRemoveUntil(context, RouteManager.login, (route) => false);
+    }
   }
 
   @override

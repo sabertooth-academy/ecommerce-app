@@ -1,6 +1,9 @@
 import 'package:ecommerce_app/route/route_manager.dart';
+import 'package:ecommerce_app/utils/global_variables.dart';
+import 'package:ecommerce_app/utils/my_shared_preference.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/user.dart';
 import '../home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,8 +14,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameTextController = TextEditingController();
+  final _sharedPreference = MySharedPreference();
 
+  final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -132,6 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: MaterialButton(
                     onPressed: () {
                       if(formKey.currentState!.validate()) {
+                        currentUser?.userName = usernameTextController.text;
+                        _sharedPreference.setUser(currentUser ?? User());
                         Navigator.pushNamed(context, RouteManager.home);
                       }
                     },
