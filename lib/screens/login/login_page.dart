@@ -4,10 +4,9 @@ import 'package:ecommerce_app/utils/my_shared_preference.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/user.dart';
-import '../home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -67,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   if(value!.isEmpty) {
                     return 'Please enter username!';
                   }
+                  return null;
                 },
                 decoration: InputDecoration(
                   filled: true,
@@ -99,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                   if(value!.isEmpty) {
                     return 'Please enter password!';
                   }
+                  return null;
                 },
                 decoration: InputDecoration(
                   filled: true,

@@ -3,6 +3,8 @@ import 'package:ecommerce_app/utils/global_variables.dart';
 import 'package:ecommerce_app/utils/my_shared_preference.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/images.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
     _animation = Tween<double>(begin: 0, end: 600).animate(_animationController)..addListener(() {
       setState(() {});
     });
@@ -36,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         child: SizedBox(
           height: _animation.value,
           width: _animation.value,
-          child: Image.asset('assets/images/logo.png'),
+          child: Image.asset(Images.logo),
         ),
       ),
     );
