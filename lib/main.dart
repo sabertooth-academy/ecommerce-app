@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/route/route_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/login/login_page.dart';
 
 void main() {
   runApp(const MyApp());

@@ -13,9 +13,9 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final _navItem = [
     HomePage(),
-    Center(child: Text('Shopping Cart'),),
-    Center(child: Text('Category'),),
-    Center(child: Text('Accounts'),),
+    const Center(child: Text('Shopping Cart'),),
+    const Center(child: Text('Category'),),
+    const Center(child: Text('Accounts'),),
   ];
 
   @override

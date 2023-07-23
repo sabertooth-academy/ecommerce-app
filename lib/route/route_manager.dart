@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/screens/home/home_page.dart';
 import 'package:ecommerce_app/screens/login/login_page.dart';
 import 'package:ecommerce_app/screens/login/splash_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/home/home.dart';
@@ -21,10 +20,10 @@ class RouteManager {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case login:
-        return MaterialPageRoute(builder: (_) => LoginPage());
+        return MaterialPageRoute(builder: (_) => const LoginPage());
 
       case home:
-        return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(builder: (_) => const Home());
 
       case homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
