@@ -4,6 +4,7 @@ class User {
   String? email;
   String? mobileNumber;
   String? address;
+  String? token;
 
   User({this.id, this.userName, this.email, this.mobileNumber, this.address});
 
@@ -13,6 +14,7 @@ class User {
     email = json['email'] ?? '';
     mobileNumber = json['mobileNumber'] ?? '';
     address = json['address'] ?? '';
+    token = json['token'] ?? '';
   }
 
   toJson() {
@@ -22,6 +24,7 @@ class User {
       'email': email ?? '',
       'mobileNumber': mobileNumber ?? '',
       'address': address ?? '',
+      'token': token ?? '',
     };
   }
 }
