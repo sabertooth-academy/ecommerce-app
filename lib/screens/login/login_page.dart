@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ecommerce_app/repository/login_repository.dart';
 import 'package:ecommerce_app/route/route_manager.dart';
 import 'package:ecommerce_app/utils/global_variables.dart';
 import 'package:ecommerce_app/utils/my_shared_preference.dart';
@@ -14,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _sharedPreference = MySharedPreference();
+  final _loginRepository = LoginRepository();
 
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
@@ -137,9 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: MaterialButton(
                     onPressed: () {
                       if(formKey.currentState!.validate()) {
-                        currentUser?.userName = usernameTextController.text;
-                        _sharedPreference.setUser(currentUser ?? User());
-                        Navigator.pushNamed(context, RouteManager.home);
+                        login(usernameTextController.text, passwordTextController.text);
                       }
                     },
                     color: Colors.cyan,
@@ -153,5 +155,37 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future login(String username, String password) async {
+
+    try {
+      final response = await _loginRepository.login(username, password);
+
+      if(response.statusCode == 200 || response.statusCode == 201) {
+        final jsonData = json.decode(response.body);
+        currentUser?.userName = username;
+        currentUser?.token = jsonData['token'] ?? '';
+        _sharedPreference.setUser(currentUser ?? User());
+        Navigator.pushNamed(context, RouteManager.home);
+
+        print('login success!');
+        return;
+
+      }
+
+      print(response.body);
+      return;
+
+    } on Exception catch(error) {
+
+      print(error);
+      return;
+    } catch(error) {
+
+      print(error);
+      return;
+    }
+
   }
 }
