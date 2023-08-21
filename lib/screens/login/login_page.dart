@@ -4,6 +4,7 @@ import 'package:ecommerce_app/repository/login_repository.dart';
 import 'package:ecommerce_app/route/route_manager.dart';
 import 'package:ecommerce_app/utils/global_variables.dart';
 import 'package:ecommerce_app/utils/my_shared_preference.dart';
+import 'package:ecommerce_app/widgets/my_snack_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/user.dart';
@@ -140,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                   child: MaterialButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       if(formKey.currentState!.validate()) {
                         login(usernameTextController.text, passwordTextController.text);
                       }
@@ -160,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
   Future login(String username, String password) async {
 
     try {
-      final response = await _loginRepository.login(username, password);
+      final response = await _loginRepository.login(context, username, password);
 
       if(response.statusCode == 200 || response.statusCode == 201) {
         final jsonData = json.decode(response.body);
@@ -169,21 +171,21 @@ class _LoginPageState extends State<LoginPage> {
         _sharedPreference.setUser(currentUser ?? User());
         Navigator.pushNamed(context, RouteManager.home);
 
-        print('login success!');
+        MySnackBar.show(context, 'Success', 'Login Success!', SnackBarType.success);
         return;
 
       }
 
-      print(response.body);
+      MySnackBar.show(context, 'Error', response.body, SnackBarType.error);
       return;
 
     } on Exception catch(error) {
 
-      print(error);
+      MySnackBar.show(context, 'Error', error.toString(), SnackBarType.error);
       return;
     } catch(error) {
 
-      print(error);
+      MySnackBar.show(context, 'Error', error.toString(), SnackBarType.error);
       return;
     }
 
